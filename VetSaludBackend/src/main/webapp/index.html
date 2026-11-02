@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetSalud Integral - Iniciar sesión</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="card login">
+        <h1>🐾 VetSalud Integral</h1>
+        <div id="mensaje"></div>
+        <form id="formLogin">
+            <label>Usuario
+                <input id="username" autocomplete="username" required autofocus>
+            </label>
+            <label>Contraseña
+                <input id="password" type="password" autocomplete="current-password" required>
+            </label>
+            <div class="acciones"><button class="btn" type="submit">Ingresar</button></div>
+        </form>
+    </div>
+    <script src="js/auth.js"></script>
+    <script>
+        // Si ya hay una sesión activa, ir directo al panel
+        fetch('api/session').then(r => { if (r.ok) location.href = 'dashboard.html'; }).catch(() => {});
+
+        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const box = document.getElementById('mensaje');
+            box.innerHTML = '';
+            try {
+                await login(document.getElementById('username').value, document.getElementById('password').value);
+                location.href = 'dashboard.html';
+            } catch (err) {
+                box.innerHTML = '<div class="msg err"></div>';
+                box.firstChild.textContent = err.message;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetSalud Integral - Panel</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>🐾 VetSalud Integral</h1>
+        <div class="herramientas">
+            <!-- Menú desplegable de exportación (sin librerías externas) -->
+            <details class="menu" id="menuExportar">
+                <summary class="btn sec mini">⬇ Exportar datos</summary>
+                <div class="menu-lista">
+                    <div class="menu-titulo">Mascotas</div>
+                    <button data-exp="mascotas/excel">Excel</button>
+                    <button data-exp="mascotas/pdf">PDF</button>
+                    <hr>
+                    <div class="menu-titulo">Propietarios</div>
+                    <button data-exp="propietarios/excel">Excel</button>
+                    <button data-exp="propietarios/pdf">PDF</button>
+                    <hr>
+                    <div class="menu-titulo">Veterinarios</div>
+                    <button data-exp="veterinarios/excel">Excel</button>
+                    <button data-exp="veterinarios/pdf">PDF</button>
+                </div>
+            </details>
+            <!-- Solo lo ve el ADMINISTRADOR (app.js lo muestra) -->
+            <button class="btn sec mini" id="btnBackup" hidden>💾 Copia de seguridad</button>
+            <span id="quien"></span><button class="btn sec mini" id="btnSalir">Cerrar sesión</button>
+        </div>
+    </header>
+    <nav id="menu"></nav>
+    <main>
+        <!-- Estadísticas: app.js llena estos contadores con GET /api/estadisticas -->
+        <section class="stats">
+            <div class="stat"><span class="num" id="mascotas-count">–</span><span>Mascotas</span></div>
+            <div class="stat"><span class="num" id="propietarios-count">–</span><span>Propietarios</span></div>
+            <div class="stat"><span class="num" id="veterinarios-count">–</span><span>Veterinarios</span></div>
+            <div class="stat"><span class="num" id="historiales-count">–</span><span>Consultas</span></div>
+        </section>
+        <div id="mensaje"></div>
+        <div class="card" id="contenido"></div>
+    </main>
+
+    <dialog id="dlg">
+        <h3 id="dlgTitulo"></h3>
+        <div id="dlgError"></div>
+        <form id="dlgForm"></form>
+    </dialog>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
